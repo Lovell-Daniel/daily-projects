@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Daniel Lovell - Day 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <header><a href="index.html">Home</a></header>
+    <div>
+        Day 2 <button type="button" id="button">Test</button>
+
+        <div id="output"></div>
+    </div>
+    <script>
+        function func(num) {
+            //returns 1st roman digit based on 10^p
+            function d1(p) {
+                var x;
+                switch (p) {
+                    case 0: x = "I"; break;
+                    case 1: x = "X"; break;
+                    case 2: x = "C"; break;
+                    case 3: x = "M"; break;
+                    //Additional cases could be added to increase capacity beyond 3999
+                    //case 4: x = "<span style=\"text-decoration: overline\">X</span>"
+                }
+                return x;
+            }
+        
+            //returns 5th roman digit based on 10^p
+            function d5(p) {
+                var x;
+                switch (p) {
+                    case 0: x = "V"; break;
+                    case 1: x = "L"; break;
+                    case 2: x = "D"; break;
+                    //Additional cases could be added to increase capacity beyond 3999
+                    //case 3: x = "<span style=\"text-decoration: overline\">V</span>"
+                }
+                return x;
+            }
+        
+            //returns 10th roman digit based on 10^p
+            function d10(p) {
+                var x;
+                switch (p) {
+                    case 0: x = "X"; break;
+                    case 1: x = "C"; break;
+                    case 2: x = "M"; break;
+                    //Additional cases could be added to increase capacity beyond 3999
+                    //case 3: x = "<span style=\"text-decoration: overline\">X</span>"
+                }
+                return x;
+            }
+
+            //Reverse the string
+            var numReversed = num.toString().split("").reverse().join("");
+
+            //Determine Roman digits for each place value
+            var romanNumeral = "";
+            for (var i = 0; i < numReversed.length; i++) {
+                var romanDigit;
+                var n = numReversed.charAt(i);
+                switch (n) {
+                    case "0": romanDigit = ""; break;
+                    case "1": romanDigit = d1(i); break;
+                    case "2": romanDigit = d1(i) + d1(i); break;
+                    case "3": romanDigit = d1(i) + d1(i) + d1(i); break;
+                    case "4": romanDigit = d1(i) + d5(i); break;
+                    case "5": romanDigit = d5(i); break;
+                    case "6": romanDigit = d5(i) + d1(i); break;
+                    case "7": romanDigit = d5(i) + d1(i) + d1(i); break;
+                    case "8": romanDigit = d5(i) + d1(i) + d1(i) + d1(i); break;
+                    case "9": romanDigit = d1(i) + d10(i); break;
+                }
+                romanNumeral = romanDigit + romanNumeral;
+            }
+
+            return romanNumeral
+            
+        }
+
+        function test() {
+            var testResults = ''
+
+            var input1 = 1
+            var result1 = 'I'
+            func(input1) === result1 ? testResults += '<div>pass</div>' : testResults += '<div>fail</div>'
+
+            var input2 = 15
+            var result2 = 'XV'
+            func(input2) === result2 ? testResults += '<div>pass</div>' : testResults += '<div>fail</div>'
+
+            var input3 = 3999
+            var result3 = 'MMMCMXCIX'
+            func(input3) === result3 ? testResults += '<div>pass</div>' : testResults += '<div>fail</div>'
+
+            return testResults
+        }
+
+        function handleTest() {
+            document.querySelector('#output').innerHTML = test()
+        }
+
+        document.querySelector('#button').addEventListener('click', handleTest)
+        
+    </script>
+</body>
+</html>

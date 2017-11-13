@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Daniel Lovell - Day 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <header><a href="index.html">Home</a></header>
+    <div>
+        Day 1 <button type="button" id="button">Test</button>
+
+        <div id="output"></div>
+    </div>
+    <script>
+        function myFunction(input1, input2) {
+            var result = input1 + input2
+
+            return result
+        }
+
+        function test() {
+            var testResults = ''
+
+            var input1a = 1
+            var input1b = 1
+            var result1 = 2
+            if (myFunction(input1a, input1b) === result1) {
+                testResults += '<div>pass</div>'
+            } else {
+                testResults += '<div>fail</div>'
+            }
+
+            var input2a = 2
+            var input2b = 2
+            var result2 = 4
+            if (myFunction(input2a, input2b) === result2) {
+                testResults += '<div>pass</div>'
+            } else {
+                testResults += '<div>fail</div>'
+            }
+
+            var input3a = 'Dan'
+            var input3b = 'iel'
+            var result3 = 'Daniel'
+            if (myFunction(input3a, input3b) === result3) {
+                testResults += '<div>pass</div>'
+            } else {
+                testResults += '<div>fail</div>'
+            }
+
+            return testResults
+        }
+
+        function handleTest() {
+            document.querySelector('#output').innerHTML = test()
+        }
+
+        document.querySelector('#button').addEventListener('click', handleTest)
+        
+    </script>
+</body>
+</html>
